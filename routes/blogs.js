@@ -5,38 +5,52 @@ const router = express.Router();
 const data = [
     {
         "id": 1,
-        "title": "ADIB",
-        "content": "Hello, I am a hacker!",
-        "author": "adib",
-        "createdAt": "2025-05-12T17:29:26.209Z"
+        "title": "Introduction to JavaScript",
+        "content": "JavaScript is a versatile programming language used for web development.",
+        "author": "John Doe",
+        "createdAt": "2023-10-01T10:00:00.000Z"
+    },
+    {
+        "id": 2,
+        "title": "Understanding Node.js",
+        "content": "Node.js allows JavaScript to be used for server-side programming.",
+        "author": "Jane Smith",
+        "createdAt": "2023-10-02T12:30:00.000Z"
+    },
+    {
+        "id": 3,
+        "title": "Exploring Express.js",
+        "content": "Express.js is a web application framework for Node.js.",
+        "author": "Alice Johnson",
+        "createdAt": "2023-10-03T15:45:00.000Z"
     }
 ];
 
 router.get('/blogs/:id', (req, res) => {    
-    const data = data.find(
+    const blog_data = data.find(
         item => item.id === parseInt(req.params.id)
     )
-    if (data){
-        res.status(200).json({
+    if (blog_data){
+        return res.status(200).json({
             message: `hello, this is blog ${req.params.id}`,
-            data: data
+            data: blog_data
         });
     }
-    res.status(404).json({
-        message: "Blog Not Found!"
+    return res.status(404).json({
+        message: `Blog with ID ${req.params.id} Not Found!`
     })
 })
 
 router.get('/blogs', (req, res) => {
-    res.status(200).json({
+    return res.status(200).json({
         data: data
     })
 })
 
-router.post('/blogs', async (req, res) => {
+router.post('/blogs', (req, res) => {
     const { error, value } = blogPostSchema.validate(req.body);
     if (error) {
-        return res.status(422).json({
+        return res.status(400).json({
             "error": error.details[0].message
         })
     }

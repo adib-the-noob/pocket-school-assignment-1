@@ -14,4 +14,4 @@ const blogPostSchema = Joi.object({
     createdAt: Joi.date().default(() => new Date())
 });
 
-module.exports =  blogPostSchema;
+module.exports = blogPostSchema;

@@ -1,5 +1,4 @@
 const express = require('express');
-const Joi = require('joi');
 
 // routes
 const blogRoutes = require('./routes/blogs.js')
